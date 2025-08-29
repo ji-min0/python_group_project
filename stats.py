@@ -13,9 +13,25 @@ swear_json = "tone_dict.json"
 try: 
     with open(swear_json, "r", encoding="utf-8") as f: 
         swear_dict = json.load(f)
+        
+    # 데이터타입(자료형)이 dict가 아닐 때
+    if not isinstance(swear_dict, dict): 
+        raise TypeError("⚠️ JSON 데이터가 딕셔너리가 아닙니다 ⚠️")
+    
+# 파일이 없을 때
 except FileNotFoundError: 
     swear_dict = {}
     print("⚠️ 욕설 사전을 찾을 수 없습니다 ⚠️")
+
+# 디코딩 문제(파일 깨졌을 때)
+except json.JSONDecodeError: 
+    swear_dict = {}
+    print("⚠️ JSON 디코딩을 실패했습니다 ⚠️")
+
+# 데이터타입(자료형) 오류
+except TypeError as e:
+    swear_dict = {}
+    print(e)
 
 
 def convert_swear(text: str) -> str: 
@@ -80,7 +96,7 @@ def analyze_logs() -> dict:
     # 결과 문장에서 단어별 등장 빈도 계산
     words = []
     for log in logs: 
-        if "욕설:" in log: 
+        if "감지된 욕설:" in log: 
             sw_text = log.split("감지된 욕설:")[1].split(", 변환 결과:")[0].strip()
             if sw_text != "없음": 
                 words.extend(sw_text.split(", "))
