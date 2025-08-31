@@ -1,19 +1,35 @@
-from filter import filter_text
-from stats import save_log, show_stats
+# main.py
+from filter import filter_profanity   # 욕설 변환 함수 (filter.py에 구현)
+from stats import log_event, analyze_logs, give_praise
 
 def main():
-    print("귀여운 욕설 차단기 시작! (quit 입력 시 종료)")
-    tone = "cute"  # 기본값 (나중에 선택 가능하게)
+    print("=== 귀여운 욕 필터기 ===")
+    print("종료하려면 'quit' 입력\n")
 
     while True:
-        text = input("👉 욕을 입력하세요: ")
-        if text.lower() == "quit":
+        # 사용자 입력 처리
+        text = input("문장을 입력하세요: ")
+        
+        # 종료조건
+        if text.strip() == "" or text.lower() == "quit":
+            print("\n프로그램을 종료합니다...\n")
             break
-        result = filter_text(text, tone)
-        print("💖 변환 결과:", result)
-        save_log(text, result)
 
-    show_stats()
+        # 욕설 필터링/변환
+        filtered_text = filter_profanity(text)
+
+        # 결과 출력
+        print(f"\n[원본] {text}")
+        print(f"[변환] {filtered_text}\n")
+
+        # 로그 기록
+        log_event(text, filtered_text)
+
+    # 프로그램 종료 후 분석/칭찬
+    print("=== 사용 통계 ===")
+    stats = analyze_logs()
+    give_praise(stats)
+
 
 if __name__ == "__main__":
     main()
