@@ -17,17 +17,13 @@
 
 ### 주요 함수
 
-#### 1. `convert_swear(text: str) -> str`
-- 욕설 단어를 랜덤한 귀여운 단어로 변환
-- 반환값: 변환된 문자열
-
-#### 2. `log_event(user_input: str, filtered_output: str) -> None`
+#### 1. `log_event(user_input: str, filtered_output: str) -> None`
 - 사용자 입력과 변환 결과를 `logs.txt`에 기록
 - 로그 포맷:  
   `[시간] 입력: {원문} -> 감지된 욕설: {욕설 단어}, 변환 결과: {변환된 단어}`
 - 원문 욕설 단어 추출 후 기록
 
-#### 3. `analyze_logs() -> dict`
+#### 2. `analyze_logs() -> dict`
 - `logs.txt`를 분석하여 통계 생성
 - 반환값 예시:
 ```python
@@ -38,7 +34,7 @@
 }
 ```
 
-#### 4. `give_praise(stats: dict) -> None`
+#### 3. `give_praise(stats: dict) -> None`
 
 - `analyze_logs()` 결과를 기반으로 칭찬 메시지 출력
 - 욕설 사용량에 따라 메시지 달라짐:
