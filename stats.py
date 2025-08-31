@@ -34,47 +34,12 @@ def read_logs() -> list[str]:
         return []
 
 
-def analyze_logs() -> dict: 
-    """
-    로그 파일을 분석해서 간단한 통계를 반환하는 함수
-    반환값 예시:
-        - 총 입력 수
-        - 욕설(치환된 단어) 사용 수
-        - 가장 많이 나온 단어 TOP5
-    """
-    # 로그 불러오기
-    logs = read_logs()
-    # 총 입력 수 계산
-    total_inputs = len(logs)
-    
-    # 욕 사용 문장 수 계산
-    filtered_count = sum(1 for log in logs if "감지된 욕설:" in log and log.split("감지된 욕설:")[1].split(", 변환 결과:")[0].strip() != "없음")
 
-    # 결과 문장에서 단어별 등장 빈도 계산
-    words = []
-    for log in logs: 
-        if "감지된 욕설:" in log: 
-            filtered = log.split("-> 변환 결과:")[1].strip()
-
-            # 변환 결과가 있으면
-            if filtered: 
-                words.extend(filtered.replace(","," ").split())
-    
-    common_words = Counter(words).most_common(5)
-    
-    return {
-        "총 입력 수": total_inputs,
-        "욕설 사용 문장 수": filtered_count,
-        "가장 많이 나온 단어 Top 5": common_words
-    }
-
-
-def give_praise(stats: dict) -> None:
+def give_praise(filtered_count):
     """
     통계를 보고 욕을 적게 썼으면 칭찬 메시지 출력
     """
-    filtered_count = stats.get("욕설 사용 문장 수", 0)
-    
+
     if filtered_count == 0:
         print("바르고 고운 말만 사용했어요! 칭찬해요 💖")
     elif filtered_count < 3: 
