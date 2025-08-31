@@ -1,3 +1,4 @@
+
 from datetime import datetime
 
 def log_usage(original, filtered):
