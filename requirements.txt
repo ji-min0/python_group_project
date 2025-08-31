@@ -1,2 +1,0 @@
-# Python requirements
-python_version >= 3.13.7
