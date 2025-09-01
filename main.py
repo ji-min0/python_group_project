@@ -1,4 +1,4 @@
-from filter import filter_profanity   # 욕설 변환 함수 (filter.py에 구현)
+from filter import filter_profanity
 from stats import log_event, give_praise
 import os, sys
 
