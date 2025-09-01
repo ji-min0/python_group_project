@@ -3,13 +3,13 @@ from stats import log_event, give_praise
 import os, sys
 
 def main():
-    print("=== 귀여운 욕 필터기 ===")
+    print("\n=== 귀여운 욕 필터기 ===")
     print("종료하려면 '종료' 입력\n")
     count = 0
     textcount = 0
     while True:
         # 사용자 입력 처리
-        text = input("문장을 입력하세요: ")
+        text = input("문장을 입력하세요 (종료하려면 '종료' 입력): ")
         
         # 종료조건
         if text.strip() == "" or text.lower() == "종료":
@@ -56,6 +56,6 @@ if __name__ == "__main__":
             if os.path.exists("logs.txt"):
                 with open("logs.txt", "w", encoding="utf-8") as f:
                     f.write("")
-            print("로그가 초기화되었습니다!")
+            print("\n로그가 초기화되었습니다!\n")
         else:
-            print("잘못된 선택입니다. 프로그램을 종료합니다.")
+            print("\n잘못된 선택입니다. 프로그램을 종료합니다.")
