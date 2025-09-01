@@ -59,3 +59,4 @@ if __name__ == "__main__":
             print("\n로그가 초기화되었습니다!\n")
         else:
             print("\n잘못된 선택입니다. 프로그램을 종료합니다.")
+            break
